@@ -16,21 +16,89 @@
         <!-- header content -->
     </header>
     <main>
+        <!-- Button to get current location details -->
+    <div class="row">
+        <div class="col-md-3 col-12 mt-3">
+            <div class="card">
+                <h4 class="card-header bg-dark text-light">Instructions</h4>
+                <div class="card-body">
+                    <p>Click the button below to get current location details</p>
+                </div>
+                <button class="btn btn-light card-footer" onclick="getCurrentLocation()">My Location</button>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                    data-bs-target="#exampleModalCenter">
+                    Filter
+                </button>
+            </div>
+        </div>
+        <!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Search Options</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Add an input field for the user to enter the town -->
+                <label for="cityTownInput" class="form-label">Enter City/Town:</label>
+                <input type="text" class="form-control" id="cityTownInput">
+
+                <!-- Content goes here -->
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Add an input field for the user to enter the town -->
+                <label for="cityTownInput" class="form-label">Enter Postcode:</label>
+                <input type="text" class="form-control" id="cityTownInput">
+
+                <!-- Content goes here -->
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Add an input field for the user to enter the town -->
+                <label for="cityTownInput" class="form-label">Search Restaurant (name):</label>
+                <input type="text" class="form-control" id="cityTownInput">
+
+                <!-- Content goes here -->
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Add an input field for the user to enter the town -->
+                <label for="cityTownInput" class="form-label">Attractions/Events:</label>
+                <input type="text" class="form-control" id="cityTownInput">
+
+                <!-- Content goes here -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <!-- Call the new function when the "Search" button is clicked -->
+                <button type="button" class="btn btn-primary" onclick="searchInModal()">Search</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
         <!-- main content -->
 
     </main>
 
     <footer>
-
         <!-- footer content -->
-
-    </footer>
-
-
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script src="assets/scripts/script.js"></script>
-</body>
+        <script
+        src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+        crossorigin="anonymous"
+      ></script>
+      <!--this one worked with my modal -->
+      <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"    
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"
+      ></script>
+      <!--added dayJS to test the time and date feature -->
+      <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+  
+      <script src="assets/scripts/script.js"></script>
+  </body>
 
 </html>
