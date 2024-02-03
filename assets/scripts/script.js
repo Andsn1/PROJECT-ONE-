@@ -1,65 +1,18 @@
-//API KEy for SeatGeek API
-var apiKey1 = "Mzk2OTg5MTB8MTcwNjc4ODA4NC42NTY5MzAy"; // SeatGeek API Key
-var wyreAPI = "d5c2cec884mshe479a0bb5604893p149fd3jsne33416b10ce7"; // Wyre Data API Key
+var seatGeek_API_KEY = "Mzk2OTg5MTB8MTcwNjc4ODA4NC42NTY5MzAy"; // SeatGeek API Key
+var wyreAPI_key = "d5c2cec884mshe479a0bb5604893p149fd3jsne33416b10ce7"; // Wyre Data API Key
+var wyere_API_host = "wyre-data.p.rapidapi.com";
 
-
-//latitude and longitude variables
-var lat;
-var lon;
+var restaurantList = [];
 
 //TODO: requires to attach to user INPUT  // --> POSTCODE TO SEARCH
 var postCode = "PE14AQ";
+
 //TODO: requires to attach to user INPUT // --> Radius distance for search
 var searchRange = "50mi";
 
-//query function to retreive data from postcode api and executing getEvent query
-function getPostCode() {
-  //query to get postcode API data
-  // PLEASE NOTE THAT RETURN CAN BE MULTIPLE ITEMS IN ARRAY DUE THAT USER CAN PASS IN HALF POST CODE
-  // EG PE4 rather than PE4 xxx
-  var postCodeQuery = `https://api.postcodes.io/postcodes?q=${postCode}`;
-  console.log(postCodeQuery);
-  fetch(postCodeQuery)
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (data) {
-      console.log(data);
-
-      // assigning {lon} and {lat} values to variables
-      lon = data.result[0].longitude;
-      lat = data.result[0].latitude;
-
-      //executing function to find event based on {lon} & {lat}
-
-      getEvent(lat, lon);
-      //display console log for checkup
-      console.log(`Lon: ${lon} & lat:${lat}`);
-    });
-}
-
-//QUERY function to retreive data from seatgeek API
-
-function getEvent(lat, lon) {
-  var query = `https://api.seatgeek.com/2/events?lat=${lat}&lon=${lon}&range=${searchRange}&client_id=${apiKey}`;
-  //output query string
-  console.log(query);
-
-  fetch(query)
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (data) {
-      //display console log for checkup
-      console.log(eventList);
-      return data.events;
-    });
-}
-
-
 function fetchEventsFromSeatGeek(latitude, longitude) {
-  const seatGeekQuery = `https://api.seatgeek.com/2/events?lat=${latitude}&lon=${longitude}&range=50mi&client_id=${apiKey1}`; //set to 15 miles range
-
+  const seatGeekQuery = `https://api.seatgeek.com/2/events?lat=${latitude}&lon=${longitude}&range=${searchRange}&client_id=${seatGeek_API_KEY}`; //set to 15 miles range
+  console.log(seatGeekQuery);
   fetch(seatGeekQuery)
     .then(function (response) {
       return response.json();
@@ -80,8 +33,8 @@ function fetchEventsFromSeatGeek(latitude, longitude) {
       alert("Error fetching events (SeatGeek). Please try again.");
     });
 }
-// Function to append search results 
-function appendToSearchResults(content) { 
+// Function to append search results
+function appendToSearchResults(content) {
   // Get the textarea element by ID
   var searchResultsTextarea = document.getElementById("searchResults");
 
@@ -122,8 +75,8 @@ function fetchDataFromWyreByTown(town) {
     url: `https://wyre-data.p.rapidapi.com/restaurants/town/${town}`,
     method: "GET",
     headers: {
-      "X-RapidAPI-Key": "d5c2cec884mshe479a0bb5604893p149fd3jsne33416b10ce7",
-      "X-RapidAPI-Host": "wyre-data.p.rapidapi.com",
+      "X-RapidAPI-Key": `${wyreAPI_key}`,
+      "X-RapidAPI-Host": `${wyere_API_host}`,
     },
   };
 
@@ -132,6 +85,7 @@ function fetchDataFromWyreByTown(town) {
       // Log the response to the console
       console.log(`Wyre Data - Restaurants in ${town}:`, response);
 
+      // console.log(response);
       // Append the response to the textarea
       appendToSearchResults(
         `Wyre Data - Restaurants in ${town}:\n` +
@@ -158,8 +112,8 @@ function searchInModal() {
     const options = {
       method: "GET",
       headers: {
-        "X-RapidAPI-Key": "d5c2cec884mshe479a0bb5604893p149fd3jsne33416b10ce7",
-        "X-RapidAPI-Host": "wyre-data.p.rapidapi.com",
+        "X-RapidAPI-Key": `${wyreAPI_key}`,
+        "X-RapidAPI-Host": `${wyere_API_host}`,
       },
     };
 
@@ -172,6 +126,28 @@ function searchInModal() {
         // Display the results in the textarea
         const resultsTextarea = document.getElementById("searchResults");
         resultsTextarea.value = JSON.stringify(data, null, 2);
+        // console.log(data);
+
+        //looping through data and collecting available postcodes  based on restaurant
+        for (var i = 0; i < data.length; i++) {
+          // var halfPostCode = data[i].PostCode.split(" ");
+          var restaurant = {
+            id: data[i]._id,
+            Name: data[i].BusinessName,
+            Address1: data[i].AddressLine2,
+            Address2: data[i].AddressLine3,
+            Rating: data[i].RatingValue,
+            postcode: data[i].PostCode,
+            longitude: data[i].Geocode_Latitude,
+            latitude: data[i].Geocode_Longitude,
+          };
+          // checking if postcode is already in array, if so then not adding to Array
+          //as well checking if there are values for longitude and latitude. otherwise skip this entry
+          if (!restaurantList.includes(restaurant)) {
+            restaurantList.push(restaurant);
+            generateRestaurantCard(restaurant);
+          }
+        }
       })
       .catch(function (error) {
         // Handle errors if any
@@ -187,5 +163,34 @@ function searchInModal() {
   $("#exampleModalCenter").modal("hide");
 }
 
+function generateRestaurantCard(restaurant) {
+  var restaurantParrent = $("#restaurant-list");
+  var maincard = $("<div>");
+  var cardHeader = $("<div>");
+  cardHeader.addClass("card-header");
+  var cardBody = $("<div>");
+  var cardFooter = $("<div>");
+  var restaurantTitle = $("<span>");
+  var restaurantAddress = $("<span>");
+  var restaurantRating = $("<span>");
 
-getPostCode();
+  restaurantAddress.addClass("wrap");
+  $(restaurantTitle).text(restaurant.Name);
+  $(restaurantAddress).text(
+    `Address: ${restaurant.Address1} ${restaurant.Address2}`
+  );
+  $(restaurantRating).text(`Rating: ${restaurant.Rating}`);
+  cardHeader.append(restaurantTitle);
+  cardBody.append(restaurantAddress);
+  cardBody.append(restaurantRating);
+
+  maincard.addClass("card col-md-3 m-3");
+  cardBody.addClass("card-body");
+  cardFooter.addClass("card-footer");
+
+  maincard.append(cardHeader);
+  maincard.append(cardBody);
+  maincard.append(cardFooter);
+
+  restaurantParrent.append(maincard);
+}
