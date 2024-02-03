@@ -163,4 +163,34 @@ function searchInModal() {
   $("#exampleModalCenter").modal("hide");
 }
 
-function generateRestaurantCard(obj) {}
+function generateRestaurantCard(restaurant) {
+  var restaurantParrent = $("#restaurant-list");
+  var maincard = $("<div>");
+  var cardHeader = $("<div>");
+  cardHeader.addClass("card-header");
+  var cardBody = $("<div>");
+  var cardFooter = $("<div>");
+  var restaurantTitle = $("<span>");
+  var restaurantAddress = $("<span>");
+  var restaurantRating = $("<span>");
+
+  restaurantAddress.addClass("wrap");
+  $(restaurantTitle).text(restaurant.Name);
+  $(restaurantAddress).text(
+    `Address: ${restaurant.Address1} ${restaurant.Address2}`
+  );
+  $(restaurantRating).text(`Rating: ${restaurant.Rating}`);
+  cardHeader.append(restaurantTitle);
+  cardBody.append(restaurantAddress);
+  cardBody.append(restaurantRating);
+
+  maincard.addClass("card col-md-3 m-3");
+  cardBody.addClass("card-body");
+  cardFooter.addClass("card-footer");
+
+  maincard.append(cardHeader);
+  maincard.append(cardBody);
+  maincard.append(cardFooter);
+
+  restaurantParrent.append(maincard);
+}
