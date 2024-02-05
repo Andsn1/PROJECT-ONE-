@@ -14,6 +14,10 @@ var searchRange = "50mi";
 var eventLimit = 100;
 
 function fetchEventsFromSeatGeek(latitude, longitude) {
+  //clear event container
+
+  $("#event-list").empty();
+
   const seatGeekQuery = `https://api.seatgeek.com/2/events?lat=${latitude}&lon=${longitude}&range=${searchRange}&client_id=${seatGeek_API_KEY}`; //set to 15 miles range
 
   //using Jung's site for CORS
@@ -34,26 +38,28 @@ function fetchEventsFromSeatGeek(latitude, longitude) {
           var eventObject = {
             eventType: data.events[i].type,
             eventId: data.events[i].id,
-            dataTime: data.events[i].datetime_local,
+            dateTime: data.events[i].datetime_local,
             isOpen: data.events[i].is_open,
             url: data.events[i].url,
             score: data.events[i].score,
             status: data.events[i].status,
             title: data.events[i].title,
-            performers: {
-              type: data.events[i].performers[j].type,
-              name: data.events[i].performers[j].name,
-              image: data.events[i].performers[j].image,
-            },
+            performers: [
+              {
+                type: data.events[i].performers[j].type,
+                name: data.events[i].performers[j].name,
+                image: data.events[i].performers[j].image,
+              },
+            ],
           };
         }
-        if (!eventList.includes(eventObject)) {
+        if (!checkIfObjectExists(eventObject, eventList)) {
           eventList.push(eventObject);
           generateEventCard(eventObject);
         }
       }
-      console.log(`EventListObject ==> `);
-      console.log(eventList);
+      // console.log(`EventListObject ==> `);
+      // console.log(eventList);
       // Log the events data to the console
       // console.log("Events based on current location (SeatGeek):", data);
 
@@ -70,7 +76,108 @@ function fetchEventsFromSeatGeek(latitude, longitude) {
     });
 }
 
-fetchEventsFromSeatGeek(52.578609, -0.235509);
+function checkIfObjectExists(object, list) {
+  for (var i = 0; i < list.length; i++) {
+    if (list[i].eventId === object.eventId) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+// fetchEventsFromSeatGeek(52.578609, -0.235509);
+
+function generateEventCard(eventObject) {
+  //generating HTML Elements
+  var mainCard = $("<div>");
+  var cardHeader = $("<div>");
+  var cardBody = $("<div>");
+  var cardFooter = $("<div>");
+  var eventTitleEl = $("<h3>");
+  var eventDateEl = $("<span>");
+  var eventDetailList = $("<ul>");
+
+  var eventTypeEl = $("<li>");
+  var eventOpenEl = $("<li>");
+  var eventScoreEl = $("<li>");
+  var eventStatusEl = $("<li>");
+  var eventPerformersEl = $("<li>");
+  //for each performer we require to create seperate block of elements
+
+  var formated_date = dayjs(eventObject.dateTime).format("DD [of] MMMM YYYY");
+
+  //assigning values to  elements
+
+  $(eventTitleEl).text(eventObject.title);
+  $(eventDateEl).text(formated_date);
+  $(eventTypeEl).text(`Event Type: ${eventObject.eventType}`);
+  eventOpenEl.text(`Is Open: ${eventObject.isOpen}`);
+  eventScoreEl.text(`Score: ${eventObject.score}`);
+  eventStatusEl.text(`Status: ${eventObject.status}`);
+
+  //adding classes to card elements
+  eventDetailList.addClass("group-item");
+
+  eventTypeEl.addClass("list-group-item");
+  eventOpenEl.addClass("list-group-item");
+  eventScoreEl.addClass("list-group-item");
+  eventStatusEl.addClass("list-group-item");
+
+  eventTypeEl.addClass("list-group-item");
+  eventTypeEl.addClass("list-group-item");
+  eventTypeEl.addClass("list-group-item");
+
+  mainCard.addClass("card col-md-5 m-2");
+  cardHeader.addClass("card-header");
+  cardBody.addClass("card-body");
+  cardFooter.addClass("card-footer");
+  eventPerformersEl.addClass("list-group-item");
+
+  $(eventDetailList).append(eventTypeEl);
+  $(eventDetailList).append(eventOpenEl);
+  $(eventDetailList).append(eventScoreEl);
+  $(eventDetailList).append(eventStatusEl);
+
+  for (var i = 0; i < eventObject.performers.length; i++) {
+    var eventPerformerListEl = $("<ul>");
+    var eventPerformerTypeEl = $("<li>");
+    var eventPerformerNameEl = $("<li>");
+    var eventPerformerImageEl = $("<li>");
+    var eventPerformerImageContainer = $("<div>");
+    var eventPerformerImage = $("<img>");
+
+    eventPerformerListEl.addClass("group-item");
+
+    eventPerformerTypeEl.addClass("list-group-item");
+    eventPerformerNameEl.addClass("list-group-item");
+    eventPerformerImageEl.addClass("list-group-item");
+    eventPerformerImage.addClass("img-fluid");
+
+    eventPerformerImage.attr("src", `${eventObject.performers[i].image}`);
+    eventPerformerTypeEl.text(`Type: ${eventObject.performers[i].type}`);
+    eventPerformerNameEl.text(`Name: ${eventObject.performers[i].name}`);
+
+    $(eventPerformersEl).append(eventPerformerListEl);
+    $(eventPerformerListEl).append(eventPerformerTypeEl);
+    $(eventPerformerListEl).append(eventPerformerNameEl);
+    $(eventPerformerListEl).append(eventPerformerImageEl);
+    $(eventPerformerImageContainer).append(eventPerformerImage);
+    $(eventPerformerImageEl).append(eventPerformerImageContainer);
+  }
+
+  //appending elements to HTML
+  $(cardHeader).append(eventTitleEl);
+  $(cardFooter).append(eventDateEl);
+
+  $(cardBody).append(eventDetailList);
+  $(eventDetailList).append(eventPerformersEl);
+
+  mainCard.append(cardHeader);
+  mainCard.append(cardBody);
+  mainCard.append(cardFooter);
+  $("#event-list").append(mainCard);
+}
 
 // Function to append search results
 function appendToSearchResults(content) {
@@ -141,7 +248,7 @@ function fetchDataFromWyreByTown(town) {
 function searchInModal() {
   // TODO:remove this to ensure that function can be executed
   // added this to ensure that API don't get rate limit
-  return;
+  // return;
   //clearing already existing values in restaurant list.
   if (restaurantList.length > 0) {
     restaurantList = [];
