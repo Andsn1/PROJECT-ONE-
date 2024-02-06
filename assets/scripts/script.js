@@ -101,7 +101,7 @@ function generateEventCard(eventObject) {
   var cardImage = $("<img>");
   cardImage.addClass("card-img-top");
 
-  cardImage.attr("src", "./assets/images/rooftop.webp");
+  cardImage.attr("src", eventObject.performers[0].image);
 
   maincard.append(cardImage);
 
@@ -117,7 +117,7 @@ function generateEventCard(eventObject) {
   var restraurantTitle = $("<h5>");
   restraurantTitle.addClass("card-title");
 
-  restraurantTitle.text(restaurant.Name);
+  restraurantTitle.text(eventObject.title);
   cardTitle.append(restraurantTitle);
 
   //creating rating placeholder
@@ -128,14 +128,14 @@ function generateEventCard(eventObject) {
   var ratingText = $("<span>");
   var ratingIcon = $("<i>");
   ratingIcon.addClass("fa-solid fa-star");
-  ratingText.text(restaurant.Rating);
+  ratingText.text(eventObject.score);
 
   //create card for restaurant location placeholder
   var locationContainer = $("<div>");
   locationContainer.addClass("name");
   var Address1 = $("<div>");
   Address1.addClass("food-type");
-  Address1.text(restaurant.Address1);
+  Address1.text(eventObject.eventType);
 
   locationContainer.append(Address1);
 
@@ -143,7 +143,7 @@ function generateEventCard(eventObject) {
   CityContainer.addClass("name");
   var city = $("<div>");
   city.addClass("city");
-  city.text(restaurant.Address2);
+  city.text(dayjs(eventObject.dateTime).format("dd/MM/YYYY"));
 
   //create open and distance elements
 
@@ -393,7 +393,6 @@ function generateRestaurantCard(restaurant) {
   ratingContainer.append(ratingIcon);
   maincard.append(cardBody);
 
-<<<<<<< HEAD
   cardBody.append(locationContainer);
   cardBody.append(CityContainer);
   cardBody.append(timeAndDistanceEl);
@@ -404,12 +403,8 @@ function generateRestaurantCard(restaurant) {
   $("#restaurant-list").append(maincard);
 }
 
-$("#location-search").on("submit", function (event) {
+$("#perform-search").on("click", function (event) {
   event.preventDefault();
-
+  console.log("Hello");
   searchInModal();
 });
-=======
-  restaurantParrent.append(maincard);
-}
->>>>>>> b4664730db80d392b62ed53b9d5d16804b19f1d0
