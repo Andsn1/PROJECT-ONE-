@@ -393,6 +393,7 @@ function generateRestaurantCard(restaurant) {
   ratingContainer.append(ratingIcon);
   maincard.append(cardBody);
 
+<<<<<<< HEAD
   cardBody.append(locationContainer);
   cardBody.append(CityContainer);
   cardBody.append(timeAndDistanceEl);
@@ -408,3 +409,7 @@ $("#location-search").on("submit", function (event) {
 
   searchInModal();
 });
+=======
+  restaurantParrent.append(maincard);
+}
+>>>>>>> b4664730db80d392b62ed53b9d5d16804b19f1d0
