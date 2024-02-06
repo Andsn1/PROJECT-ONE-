@@ -11,9 +11,9 @@ var postCode = "PE14AQ";
 //TODO: requires to attach to user INPUT // --> Radius distance for search
 var searchRange = "50mi";
 //limit to fetch up to 10 events only
-var eventLimit = 20;
+var eventLimit = 8;
 
-var restaurantLimit = 20;
+var restaurantLimit = 8;
 
 function fetchEventsFromSeatGeek(latitude, longitude) {
   //clear event container

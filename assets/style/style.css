@@ -141,6 +141,7 @@
   position: relative;
   top: 0;
   border: none;
+  width: 19rem;
 }
 
 .restaurant-card:hover {
