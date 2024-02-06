@@ -1,0 +1,91 @@
+* {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: black;
+    background-color: white;
+    margin: 0;
+    padding: 0;
+}
+
+
+header {
+    text-align: center;
+    width: 1200px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.event-info {
+    margin: 25px 100px;
+    display: flex;
+    justify-content: right;
+    flex-direction: column;
+    border: solid;
+    border-width: 7px;
+    border-radius: 15px 50px;
+    overflow: hidden;
+}
+
+.info-section {
+    
+    padding-top: 20px;
+    padding-bottom: 20px;
+    
+}
+
+.travel-section{
+    padding: 10px 0px 10px 20px;
+}
+
+#travel {
+    padding: 10px;
+}
+#app-name{
+    padding: 10px
+}
+
+#evemt-poster{
+    margin: auto;
+}
+
+#event-image {
+    border-radius: 40px;
+    max-width: 100%;
+    height: 500px;
+}
+
+#event {
+    font-size: 30px;
+    padding-left: 40px;
+}
+
+#event-host, #rating {
+    text-align: right;
+    padding-right: 90px;
+}
+
+#type{
+    text-align: right;
+    padding-right: 43px;
+}
+
+#type img{
+    height: 40px;
+    width: 40px;
+}
+
+#travel {
+    display: inline-block;
+    width: 800px;
+}
+
+#about-section{
+    float: right;
+    text-align: right;
+    width: 800px;
+}
+
+#about-section {
+    padding: 10px 20px 10px 0px;
+}
