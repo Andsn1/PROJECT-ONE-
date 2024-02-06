@@ -123,7 +123,7 @@ function generateEventCard(eventObject) {
   //creating rating placeholder
   var ratingContainer = $("<div>");
   ratingContainer.addClass("rating");
-  cardBody.append(ratingContainer);
+  cardTitle.append(ratingContainer);
 
   var ratingText = $("<span>");
   var ratingIcon = $("<i>");
@@ -148,7 +148,7 @@ function generateEventCard(eventObject) {
   //create open and distance elements
 
   var timeAndDistanceEl = $("<div>");
-
+  timeAndDistanceEl.addClass("name");
   var openingTime = $("<div>");
   openingTime.addClass("time");
   openingTime.text("Opens at 5AM ");
@@ -379,6 +379,7 @@ function generateRestaurantCard(restaurant) {
   //create open and distance elements
 
   var timeAndDistanceEl = $("<div>");
+  timeAndDistanceEl.addClass("name");
 
   var openingTime = $("<div>");
   openingTime.addClass("time");
