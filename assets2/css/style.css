@@ -1,7 +1,7 @@
 * {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     color: black;
-    background-color: white;
+    background-color: rgba(251, 251, 251, 0.977);
     margin: 0;
     padding: 0;
 }
@@ -15,9 +15,37 @@ header {
     flex-direction: column;
 }
 
+#app-name{
+    color: rgb(245, 92, 92);
+    font-size: 40px;
+    font-family: "Kanit", sans-serif;
+    font-weight: 800;
+    font-style: italic;
+}
+
+#row{
+    display: flex;
+    flex-wrap: flex;
+}
+
+aside {
+    flex: 70%;
+}
+
+#location-image {
+    border-radius: 30px;
+    height: 700px;
+    padding: 60px;
+}
+
+main {
+    flex: 30%
+}
 
 .event-info {
-    margin: 25px 100px;
+    margin: 25px 80px;
+    width: 700px;
+    float: left;
     display: flex;
     justify-content: right;
     flex-direction: column;
@@ -28,64 +56,40 @@ header {
 }
 
 .info-section {
-    
-    padding-top: 20px;
-    padding-bottom: 20px;
-    
+    padding: 10px 0px 10px 30px;
 }
 
-.travel-section{
-    padding: 10px 0px 10px 20px;
-}
 
-#travel {
-    padding: 10px;
-}
 #app-name{
     padding: 10px
 }
 
-#evemt-poster{
-    margin: auto;
-}
 
 #event-image {
-    border-radius: 40px;
+    padding: 150px 120px;
     max-width: 100%;
     height: 500px;
 }
 
 #event {
     font-size: 30px;
-    padding-left: 40px;
-}
-
-#event-host, #rating {
-    text-align: right;
-    padding-right: 90px;
-}
-
-#type{
-    text-align: right;
-    padding-right: 43px;
-}
-
-#type img{
-    height: 40px;
-    width: 40px;
 }
 
 #travel {
     display: inline-block;
-    width: 800px;
 }
 
-#about-section{
-    float: right;
-    text-align: right;
-    width: 800px;
-}
-
-#about-section {
-    padding: 10px 20px 10px 0px;
+button {
+    border: none;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    margin: 30px 0px 30px 60px;
+    display: inline-block;
+    font-size: 16px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    background-color: rgb(67, 141, 216); 
+    color: black; 
+    border-radius: 12px;
 }
