@@ -327,8 +327,8 @@ function searchInModal() {
 }
 
 function generateRestaurantCard(restaurant) {
-  var restaurantParrent = $("#restaurant-list");
-  var maincard = $("<div>");
+  var restaurantParent = $("#restaurant-list");
+  var mainCard = $("<div>");
   var cardHeader = $("<div>");
   cardHeader.addClass("card-header");
   var cardBody = $("<div>");
@@ -360,13 +360,13 @@ function generateRestaurantCard(restaurant) {
 
   cardBody.append(cardList);
 
-  maincard.addClass("card col-md-3 m-3");
+  mainCard.addClass("card col-md-3 m-3");
   cardBody.addClass("card-body");
   cardFooter.addClass("card-footer");
 
-  maincard.append(cardHeader);
-  maincard.append(cardBody);
-  maincard.append(cardFooter);
+  mainCard.append(cardHeader);
+  mainCard.append(cardBody);
+  mainCard.append(cardFooter);
 
-  restaurantParrent.append(maincard);
+  restaurantParent.append(mainCard);
 }
