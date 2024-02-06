@@ -45,24 +45,32 @@
             <i class="fa-solid fa-location-dot location-icon"></i>
             London
           </button>
+          <!--dropdown menu selection-->
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <li><a class="dropdown-item" href="#">current-location</a></li>
+            <a class="dropdown-item dropdown-attractions" data-value="attractions">Attractions</a>
+            <a class="dropdown-item dropdown-shopping" data-value="Shopping">Shopping</a>
+            <a class="dropdown-item dropdown-night-life" data-value="night-life">Night-life</a>
+            <a class="dropdown-item dropdown-restaurants" data-value="restaurants">restaurants</a>
+            <a class="dropdown-item dropdown-pubs-bars" data-value="pubs-bars">Pubs & bars</a>
           </ul>
         </div>
         <div class="search-citybuttons">
           <div class="city">
             <i class="fa-solid fa-magnifying-glass search-icon"></i>
             <input
-              type="text"
+              type=pubs-bars
               class="search-city"
               placeholder="search for restaurants"
             />
           </div>
         </div>
       </div>
-      <div class="click-button">
-        <button type="button" class="btn btn-primary search-btn">Enter</button>
-      </div>
+      <div class="modal-footer">
+        <!-- calls the current location function-->
+        <button type="button" class="btn btn-secondary" onclick="currentLocation()">My location</button>
+        <!-- Call the new function when the "Search" button is clicked -->
+        <button type="button" class="btn btn-primary" onclick="performSearch()">Search</button>
+    </div>
     </section>
     <section class="restaurants">
       <div class="card restaurant-card" style="width: 19rem">
