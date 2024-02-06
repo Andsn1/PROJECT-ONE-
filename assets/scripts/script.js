@@ -11,7 +11,9 @@ var postCode = "PE14AQ";
 //TODO: requires to attach to user INPUT // --> Radius distance for search
 var searchRange = "50mi";
 //limit to fetch up to 10 events only
-var eventLimit = 100;
+var eventLimit = 20;
+
+var restaurantLimit = 20;
 
 function fetchEventsFromSeatGeek(latitude, longitude) {
   //clear event container
@@ -64,10 +66,10 @@ function fetchEventsFromSeatGeek(latitude, longitude) {
       // console.log("Events based on current location (SeatGeek):", data);
 
       // Append events data to the textarea
-      appendToSearchResults(
-        "Events based on current location (SeatGeek):\n" +
-          JSON.stringify(data, null, 2)
-      );
+      // appendToSearchResults(
+      //   "Events based on current location (SeatGeek):\n" +
+      //     JSON.stringify(data, null, 2)
+      // );
     })
     .catch(function (error) {
       // Handle errors if any
@@ -89,104 +91,95 @@ function checkIfObjectExists(object, list) {
 // fetchEventsFromSeatGeek(52.578609, -0.235509);
 
 function generateEventCard(eventObject) {
-  //generating HTML Elements
-  var mainCard = $("<div>");
-  var cardHeader = $("<div>");
+  //create main card
+  var maincard = $("<div>");
+
+  maincard.addClass("card restaurant-card");
+  maincard.attr("style", "width:19rem");
+
+  //create image element
+  var cardImage = $("<img>");
+  cardImage.addClass("card-img-top");
+
+  cardImage.attr("src", eventObject.performers[0].image);
+
+  maincard.append(cardImage);
+
+  //create card body
   var cardBody = $("<div>");
-  var cardFooter = $("<div>");
-  var eventTitleEl = $("<h3>");
-  var eventDateEl = $("<span>");
-  var eventDetailList = $("<ul>");
-
-  var eventTypeEl = $("<li>");
-  var eventOpenEl = $("<li>");
-  var eventScoreEl = $("<li>");
-  var eventStatusEl = $("<li>");
-  var eventPerformersEl = $("<li>");
-  //for each performer we require to create seperate block of elements
-
-  var formated_date = dayjs(eventObject.dateTime).format("DD [of] MMMM YYYY");
-
-  //assigning values to  elements
-
-  $(eventTitleEl).text(eventObject.title);
-  $(eventDateEl).text(formated_date);
-  $(eventTypeEl).text(`Event Type: ${eventObject.eventType}`);
-  eventOpenEl.text(`Is Open: ${eventObject.isOpen}`);
-  eventScoreEl.text(`Score: ${eventObject.score}`);
-  eventStatusEl.text(`Status: ${eventObject.status}`);
-
-  //adding classes to card elements
-  eventDetailList.addClass("group-item");
-
-  eventTypeEl.addClass("list-group-item");
-  eventOpenEl.addClass("list-group-item");
-  eventScoreEl.addClass("list-group-item");
-  eventStatusEl.addClass("list-group-item");
-
-  eventTypeEl.addClass("list-group-item");
-  eventTypeEl.addClass("list-group-item");
-  eventTypeEl.addClass("list-group-item");
-
-  mainCard.addClass("card col-md-5 m-2");
-  cardHeader.addClass("card-header");
   cardBody.addClass("card-body");
-  cardFooter.addClass("card-footer");
-  eventPerformersEl.addClass("list-group-item");
 
-  $(eventDetailList).append(eventTypeEl);
-  $(eventDetailList).append(eventOpenEl);
-  $(eventDetailList).append(eventScoreEl);
-  $(eventDetailList).append(eventStatusEl);
+  //create card title
+  var cardTitle = $("<div>");
+  cardTitle.addClass("name title");
 
-  for (var i = 0; i < eventObject.performers.length; i++) {
-    var eventPerformerListEl = $("<ul>");
-    var eventPerformerTypeEl = $("<li>");
-    var eventPerformerNameEl = $("<li>");
-    var eventPerformerImageEl = $("<li>");
-    var eventPerformerImageContainer = $("<div>");
-    var eventPerformerImage = $("<img>");
+  //create element for restaurant title with text placeholder
+  var restraurantTitle = $("<h5>");
+  restraurantTitle.addClass("card-title");
 
-    eventPerformerListEl.addClass("group-item");
+  restraurantTitle.text(eventObject.title);
+  cardTitle.append(restraurantTitle);
 
-    eventPerformerTypeEl.addClass("list-group-item");
-    eventPerformerNameEl.addClass("list-group-item");
-    eventPerformerImageEl.addClass("list-group-item");
-    eventPerformerImage.addClass("img-fluid");
+  //creating rating placeholder
+  var ratingContainer = $("<div>");
+  ratingContainer.addClass("rating");
+  cardBody.append(ratingContainer);
 
-    eventPerformerImage.attr("src", `${eventObject.performers[i].image}`);
-    eventPerformerTypeEl.text(`Type: ${eventObject.performers[i].type}`);
-    eventPerformerNameEl.text(`Name: ${eventObject.performers[i].name}`);
+  var ratingText = $("<span>");
+  var ratingIcon = $("<i>");
+  ratingIcon.addClass("fa-solid fa-star");
+  ratingText.text(eventObject.score);
 
-    $(eventPerformersEl).append(eventPerformerListEl);
-    $(eventPerformerListEl).append(eventPerformerTypeEl);
-    $(eventPerformerListEl).append(eventPerformerNameEl);
-    $(eventPerformerListEl).append(eventPerformerImageEl);
-    $(eventPerformerImageContainer).append(eventPerformerImage);
-    $(eventPerformerImageEl).append(eventPerformerImageContainer);
-  }
+  //create card for restaurant location placeholder
+  var locationContainer = $("<div>");
+  locationContainer.addClass("name");
+  var Address1 = $("<div>");
+  Address1.addClass("food-type");
+  Address1.text(eventObject.eventType);
 
-  //appending elements to HTML
-  $(cardHeader).append(eventTitleEl);
-  $(cardFooter).append(eventDateEl);
+  locationContainer.append(Address1);
 
-  $(cardBody).append(eventDetailList);
-  $(eventDetailList).append(eventPerformersEl);
+  var CityContainer = $("<div>");
+  CityContainer.addClass("name");
+  var city = $("<div>");
+  city.addClass("city");
+  city.text(dayjs(eventObject.dateTime).format("dd/MM/YYYY"));
 
-  mainCard.append(cardHeader);
-  mainCard.append(cardBody);
-  mainCard.append(cardFooter);
-  $("#event-list").append(mainCard);
+  //create open and distance elements
+
+  var timeAndDistanceEl = $("<div>");
+
+  var openingTime = $("<div>");
+  openingTime.addClass("time");
+  openingTime.text("Opens at 5AM ");
+
+  var distance = $("<div>");
+  distance.addClass("distance");
+  distance.text("2.3 km");
+
+  cardBody.append(cardTitle);
+  ratingContainer.append(ratingText);
+  ratingContainer.append(ratingIcon);
+  maincard.append(cardBody);
+
+  cardBody.append(locationContainer);
+  cardBody.append(CityContainer);
+  cardBody.append(timeAndDistanceEl);
+
+  timeAndDistanceEl.append(openingTime);
+  timeAndDistanceEl.append(distance);
+
+  $("#restaurant-list").append(maincard);
 }
 
 // Function to append search results
-function appendToSearchResults(content) {
-  // Get the textarea element by ID
-  var searchResultsTextarea = document.getElementById("searchResults");
+// function appendToSearchResults(content) {
+//   // Get the textarea element by ID
+//   // var searchResultsTextarea = document.getElementById("searchResults");
 
-  // Concatenate the existing value with the new content and set it back to the textarea
-  searchResultsTextarea.textContent += content + "\n";
-}
+//   // Concatenate the existing value with the new content and set it back to the textarea
+//   searchResultsTextarea.textContent += content + "\n";
+// }
 // Get Current location
 function getCurrentLocation() {
   // Use browser's geolocation API to get the current location
@@ -277,9 +270,9 @@ function searchInModal() {
       })
       .then(function (data) {
         // Display the results in the textarea
-        const resultsTextarea = document.getElementById("searchResults");
-        resultsTextarea.value = JSON.stringify(data, null, 2);
-        // console.log(data);
+        // const resultsTextarea = document.getElementById("searchResults");
+        // resultsTextarea.value = JSON.stringify(data, null, 2);
+        console.log(data);
 
         //looping through data and collecting available postcodes  based on restaurant
         for (var i = 0; i < data.length; i++) {
@@ -302,7 +295,9 @@ function searchInModal() {
             restaurant.longitude
           ) {
             restaurantList.push(restaurant);
-            generateRestaurantCard(restaurant);
+            if (i < restaurantLimit) {
+              generateRestaurantCard(restaurant);
+            }
             if (i < eventLimit) {
               fetchEventsFromSeatGeek(
                 restaurant.latitude,
@@ -327,46 +322,89 @@ function searchInModal() {
 }
 
 function generateRestaurantCard(restaurant) {
-  var restaurantParent = $("#restaurant-list");
-  var mainCard = $("<div>");
-  var cardHeader = $("<div>");
-  cardHeader.addClass("card-header");
+  //create main card
+  var maincard = $("<div>");
+
+  maincard.addClass("card restaurant-card");
+  maincard.attr("style", "width:19rem");
+
+  //create image element
+  var cardImage = $("<img>");
+  cardImage.addClass("card-img-top");
+
+  cardImage.attr("src", "./assets/images/rooftop.webp");
+
+  maincard.append(cardImage);
+
+  //create card body
   var cardBody = $("<div>");
-  var cardFooter = $("<div>");
-  var cardList = $("<ul>");
-  var restaurantTitle = $("<span>");
-  var restaurantAddress = $("<li>");
-  var postCodeEl = $("<li>");
-  var restaurantRating = $("<li>");
-
-  restaurantAddress.addClass("list-group-item");
-  restaurantRating.addClass("list-group-item");
-  postCodeEl.addClass("list-group-item");
-  cardList.addClass("list-group");
-
-  $(restaurantTitle).text(restaurant.Name);
-  $(restaurantAddress).text(
-    `Address: ${restaurant.Address1} ${restaurant.Address2}`
-  );
-  $(postCodeEl).text(`Post Code: ${restaurant.postcode}`);
-
-  $(restaurantRating).text(`Rating: ${restaurant.Rating}`);
-
-  cardHeader.append(restaurantTitle);
-
-  cardList.append(restaurantAddress);
-  cardList.append(postCodeEl);
-  cardList.append(restaurantRating);
-
-  cardBody.append(cardList);
-
-  mainCard.addClass("card col-md-3 m-3");
   cardBody.addClass("card-body");
-  cardFooter.addClass("card-footer");
 
-  mainCard.append(cardHeader);
-  mainCard.append(cardBody);
-  mainCard.append(cardFooter);
+  //create card title
+  var cardTitle = $("<div>");
+  cardTitle.addClass("name title");
 
-  restaurantParent.append(mainCard);
+  //create element for restaurant title with text placeholder
+  var restraurantTitle = $("<h5>");
+  restraurantTitle.addClass("card-title");
+
+  restraurantTitle.text(restaurant.Name);
+  cardTitle.append(restraurantTitle);
+
+  //creating rating placeholder
+  var ratingContainer = $("<div>");
+  ratingContainer.addClass("rating");
+  cardBody.append(ratingContainer);
+
+  var ratingText = $("<span>");
+  var ratingIcon = $("<i>");
+  ratingIcon.addClass("fa-solid fa-star");
+  ratingText.text(restaurant.Rating);
+
+  //create card for restaurant location placeholder
+  var locationContainer = $("<div>");
+  locationContainer.addClass("name");
+  var Address1 = $("<div>");
+  Address1.addClass("food-type");
+  Address1.text(restaurant.Address1);
+
+  locationContainer.append(Address1);
+
+  var CityContainer = $("<div>");
+  CityContainer.addClass("name");
+  var city = $("<div>");
+  city.addClass("city");
+  city.text(restaurant.Address2);
+
+  //create open and distance elements
+
+  var timeAndDistanceEl = $("<div>");
+
+  var openingTime = $("<div>");
+  openingTime.addClass("time");
+  openingTime.text("Opens at 5AM ");
+
+  var distance = $("<div>");
+  distance.addClass("distance");
+  distance.text("2.3 km");
+
+  cardBody.append(cardTitle);
+  ratingContainer.append(ratingText);
+  ratingContainer.append(ratingIcon);
+  maincard.append(cardBody);
+
+  cardBody.append(locationContainer);
+  cardBody.append(CityContainer);
+  cardBody.append(timeAndDistanceEl);
+
+  timeAndDistanceEl.append(openingTime);
+  timeAndDistanceEl.append(distance);
+
+  $("#restaurant-list").append(maincard);
 }
+
+$("#perform-search").on("click", function (event) {
+  event.preventDefault();
+  console.log("Hello");
+  searchInModal();
+});
