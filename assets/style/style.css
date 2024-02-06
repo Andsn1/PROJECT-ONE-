@@ -71,12 +71,16 @@
 
 .current {
   color: #757575;
+  width: 100%;
 }
 
 .dropdown {
   width: 34%;
   padding: 10px;
   border-right: 1px solid #ccc;
+}
+.dropdown button:focus {
+  outline: none;
 }
 
 .search-citybuttons {
@@ -89,6 +93,7 @@
 }
 
 .city {
+  width: 100% !important;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -100,7 +105,9 @@
   border: none;
   background-color: transparent;
 }
-
+.search-city:focus {
+  outline: none;
+}
 .search-icon {
   color: #757575;
 }
