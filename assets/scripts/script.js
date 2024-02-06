@@ -354,7 +354,7 @@ function generateRestaurantCard(restaurant) {
   //creating rating placeholder
   var ratingContainer = $("<div>");
   ratingContainer.addClass("rating");
-  cardBody.append(ratingContainer);
+  cardTitle.append(ratingContainer);
 
   var ratingText = $("<span>");
   var ratingIcon = $("<i>");
