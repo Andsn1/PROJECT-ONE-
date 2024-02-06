@@ -48,32 +48,13 @@
 
                             <!-- Content goes here -->
                         </div>
-                        <div class="modal-body" id="modalBody">
-                            <!-- Add an input field for the user to enter the town -->
-                            <label for="cityTownInput" class="form-label">Enter Postcode:</label>
-                            <input type="text" class="form-control" id="cityTownInput">
 
-                            <!-- Content goes here -->
-                        </div>
-                        <div class="modal-body" id="modalBody">
-                            <!-- Add an input field for the user to enter the town -->
-                            <label for="cityTownInput" class="form-label">Search Restaurant (name):</label>
-                            <input type="text" class="form-control" id="cityTownInput">
-
-                            <!-- Content goes here -->
-                        </div>
-                        <div class="modal-body" id="modalBody">
-                            <!-- Add an input field for the user to enter the town -->
-                            <label for="cityTownInput" class="form-label">Attractions/Events:</label>
-                            <input type="text" class="form-control" id="cityTownInput">
-
-                            <!-- Content goes here -->
-                        </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             <!-- Call the new function when the "Search" button is clicked -->
-                            <button type="button" class="btn btn-primary" onclick="searchInModal()">Search</button>
+                            <button type="button" class="btn btn-primary" onclick="performSearch()">Search</button>
                         </div>
+                        
                     </div>
                 </div>
             </div>
@@ -85,17 +66,15 @@
                     <h4 class="card-header bg-dark text-light">Return results area</h4>
                     <div class="searchResults">
                         <textarea id="searchResults" class="form-control" rows="10" readonly></textarea>
-                    </div>
+                      </div>
                 </div>
             </div>
-
-            <!-- main content -->
-
-            <div class="container ">
-                <div class="row" id="restaurant-list">
-
+            <!--display cards area-->
+            <div class="container">
+                <div id="restaurant-list">
+                  <!-- Restaurants will be appended here -->
                 </div>
-            </div>
+              </div>
 
     </main>
 
