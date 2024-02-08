@@ -16,6 +16,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./assets/style/style.css" />
+    <link rel="stylesheet" href="./assets/style/style2.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
@@ -62,20 +63,24 @@
               type="pubs-bars"
               class="search-city"
               id="cityTownInput"
-              placeholder="search for restaurants, bars, cuisine"
+              placeholder="Enter Town/City ... ?"
             />
           </div>
         </div>
       </div>
         <!-- Call the new function when the "Search" button is clicked -->
-        <button type="button" id="perform-search" class="btn btn-primary">
-          Search
-        </button>
+        <button type="button" class="btn btn-primary" onclick="performSearch()">Search</button>
+        <button type="button" class="btn btn-primary" onclick="searchEvents()">Local Events</button>
       </div>
     </section>
-    <section class="restaurants" id="restaurant-list">
-        <!--Append cards here from search results-->
-    </section>
+    <div class="container">
+      <div id="error-message" style="color: red;"></div>
+      <section class="restaurants" id="restaurant-list">
+        <!-- Restaurants will be appended here -->
+      </section>
+      
+    </div>
+    
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
@@ -88,7 +93,7 @@
     ></script>
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
 
-    <script src="assets/scripts/script.js"></script>
-    <script src="assets/scripts/script2.js"></script>
+  <!--<script src="assets/scripts/script.js"></script>-->
+  <script src="assets/scripts/script2.js"></script>
   </body>
 </html>
