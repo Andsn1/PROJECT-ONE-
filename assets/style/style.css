@@ -119,7 +119,7 @@
 
 .search-btn {
   padding: 15px 20px;
-  width: 100%;
+  width: 20px;
   background-color: rgb(245, 92, 92);
   border: none;
 }
@@ -142,6 +142,7 @@
   top: 0;
   border: none;
   width: 19rem;
+  height: 320px;
 }
 
 .restaurant-card:hover {
