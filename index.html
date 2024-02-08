@@ -1,129 +1,94 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,190;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,190;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=League+Spartan:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./assets/style/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>Document</title>
+  </head>
 
-<head>
-    <meta charset="UTF-8">
+  <body>
+    <section class="main-image">
+      <div class="content">
+        <h1 class="heading">Events Round The Corner</h1>
+        <p class="sub-heading">Find the best restaurant, cafe's and bars</p>
+      </div>
+    </section>
+    <section class="search-buttons">
+      <div class="current-location">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle current"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <i class="fa-solid fa-location-dot location-icon"></i>
+            Whats on?
+          </button>
+          <!--dropdown menu selection-->
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
+            <a class="dropdown-item dropdown-places" data-category="restaurants">Restaurants</a>
+            <a class="dropdown-item dropdown-night-life" data-value="night-life"></a>
+            <a class="dropdown-item dropdown-shopping" data-category="bar pub nightclub">Night Life</a>
+            <a class="dropdown-item dropdown-news" data-category="comedy">Comedy</a>
+            <a class="dropdown-item dropdown-news" data-category="attractions">Attractions</a>
+          </ul>
+        </div>
+        <div class="search-citybuttons">
+          <div class="city">
+            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+            <input
+              type="pubs-bars"
+              class="search-city"
+              id="cityTownInput"
+              placeholder="search for restaurants, bars, cuisine"
+            />
+          </div>
+        </div>
+      </div>
+        <!-- Call the new function when the "Search" button is clicked -->
+        <button type="button" id="perform-search" class="btn btn-primary">
+          Search
+        </button>
+      </div>
+    </section>
+    <section class="restaurants" id="restaurant-list">
+        <!--Append cards here from search results-->
+    </section>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
-    <link rel="stylesheet" src="assets/style/style.css">
-
-</head>
-
-<body>
-    <header>
-        <!-- header content -->
-    </header>
-    <main>
-        <!-- Button to get current location details -->
-        <div class="row">
-            <div class="col-md-3 col-12 mt-3">
-                <div class="card">
-                    <h4 class="card-header bg-dark text-light">Instructions</h4>
-                    <div class="card-body">
-                        <p>Click the button below to get current location details</p>
-                    </div>
-                    <button class="btn btn-light card-footer" onclick="getCurrentLocation()">My Location</button>
-                    <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                        data-bs-target="#exampleModalCenter">
-                        Filter
-                    </button>
-                </div>
-            </div>
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Search Options</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body" id="modalBody">
-                            <!-- Add an input field for the user to enter the town -->
-                            <label for="cityTownInput" class="form-label">Enter City/Town:</label>
-                            <input type="text" class="form-control" id="cityTownInput">
-
-                            <!-- Content goes here -->
-                        </div>
-                        <div class="modal-body" id="modalBody">
-                            <!-- Add an input field for the user to enter the town -->
-                            <label for="cityTownInput" class="form-label">Enter Postcode:</label>
-                            <input type="text" class="form-control" id="cityTownInput">
-
-                            <!-- Content goes here -->
-                        </div>
-                        <div class="modal-body" id="modalBody">
-                            <!-- Add an input field for the user to enter the town -->
-                            <label for="cityTownInput" class="form-label">Search Restaurant (name):</label>
-                            <input type="text" class="form-control" id="cityTownInput">
-
-                            <!-- Content goes here -->
-                        </div>
-                        <div class="modal-body" id="modalBody">
-                            <!-- Add an input field for the user to enter the town -->
-                            <label for="cityTownInput" class="form-label">Attractions/Events:</label>
-                            <input type="text" class="form-control" id="cityTownInput">
-
-                            <!-- Content goes here -->
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <!-- Call the new function when the "Search" button is clicked -->
-                            <button type="button" class="btn btn-primary" onclick="searchInModal()">Search</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Second column (col-md-6) -->
-            <div class="col-md-6 col-12 mt-3">
-                <!-- Content for the second column -->
-                <div class="card">
-                    <!-- Add your content here -->
-                    <h4 class="card-header bg-dark text-light">Return results area</h4>
-                    <div class="searchResults">
-                        <textarea id="searchResults" class="form-control" rows="10" readonly></textarea>
-                    </div>
-                </div>
-            </div>
-
-            <!-- main content -->
-
-            <div class="container ">
-                <div class="row  justify-content-center text-center  ">
-                    <div class="col-md-5 border-1 border-black border m-1 ">
-                        <div class="row justify-content-center " id="restaurant-list">
-
-                        </div>
-                    </div>
-                    <div class="col-md-5  border-1 border-black border m-1">
-                        <div class="row justify-content-center " id="event-list">
-
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-
-    </main>
-
-    <footer>
-        <!-- footer content -->
-
-
-        <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-        <!--this one worked with my modal -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-            crossorigin="anonymous"></script>
-        <!--added dayJS to test the time and date feature -->
-        <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
-
-        <script src="assets/scripts/script.js"></script>
-</body>
-
+    <script src="assets/scripts/script.js"></script>
+    <script src="assets/scripts/script2.js"></script>
+  </body>
 </html>
