@@ -238,7 +238,7 @@ function fetchDataFromWyreByTown(town) {
     });
 }
 //model search
-function searchInModal() {
+function searchEvents() {
   // TODO:remove this to ensure that function can be executed
   // added this to ensure that API don't get rate limit
   // return;
@@ -404,8 +404,8 @@ function generateRestaurantCard(restaurant) {
   $("#restaurant-list").append(maincard);
 }
 
-$("#perform-search").on("click", function (event) {
+$("#performSearch").on("click", function (event) {
   event.preventDefault();
   console.log("Hello");
-  searchInModal();
+  searchEvents();
 });
