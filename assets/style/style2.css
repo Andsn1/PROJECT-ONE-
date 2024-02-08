@@ -25,20 +25,21 @@
 }
 
 .heading {
-  color: white;
-  font-size: 40px;
-  font-family: "Kanit", sans-serif;
-  font-weight: 800;
-  font-style: italic;
+  font-size: 6em; /* Adjust the font size as needed */
+  font-weight: bold;
+  color: #e2dfdf; /* Set a darker text color */
+  transition: color 0.3s ease; /* Add a color transition effect */
 }
 
 .sub-heading {
-  color: white;
-  font-size: 30px;
-  font-family: "League Spartan", sans-serif;
-
-  font-weight: 500;
-  font-style: normal;
+  font-size: 3em; /* Adjust the font size as needed */
+  color: #d5d9e7; /* Set a darker text color */
+  transition: color 0.3s ease; /* Add a color transition effect */
+}
+/* On hover, change the text color for both headings */
+.heading:hover,
+.sub-heading:hover {
+  color: #0775eb; 
 }
 
 /* search button section */
