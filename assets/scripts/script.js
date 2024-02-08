@@ -359,7 +359,9 @@ function generateRestaurantCard(restaurant) {
   var ratingText = $("<span>");
   var ratingIcon = $("<i>");
   ratingIcon.addClass("fa-solid fa-star");
-  ratingText.text(restaurant.Rating);
+  ratingText.text(
+    restaurant.Rating === "Exempt" ? 1 : restaurant.Rating <= 1 ? 1 : 1
+  );
 
   //create card for restaurant location placeholder
   var locationContainer = $("<div>");
