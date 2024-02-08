@@ -219,13 +219,22 @@ function displayEventsInRestaurantArea(events) {
     // Loop through the events and generate cards
     events.forEach(function (event) {
       generateEventCard(event);
+
+    events.forEach(function (event) {
+      events.addEventListener("click", function() {
+        window.location.href = "https://www.google.com/?client=safari"
+    })
+  
+    })
+
     });
   }
   function generateEventCard(event) {
     // Create main card
     var mainCard = document.createElement("div");
     mainCard.classList.add("card", "restaurant-card", "mb-4");
-  
+
+
     // Create image element
     var cardImage = document.createElement("img");
     cardImage.classList.add("card-img-top");
@@ -286,4 +295,9 @@ function displayEventsInRestaurantArea(events) {
     // Append the card to the restaurant area
     var eventListContainer = document.getElementById("restaurant-list");
     eventListContainer.appendChild(mainCard);
+  }
+
+
+  function linkToInfoPage () {
+
   }
