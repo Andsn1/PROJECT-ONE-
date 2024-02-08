@@ -1,18 +1,17 @@
 * {
-    font-family: "League Spartan", sans-serif;
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-
-header {
-    height: 300px;
-    width: 100%;
+/* background image section */
+.main-image {
+  width: 100%;
+  height: 500px;
 }
 
-.spContent{
-  background-image: url("../../assets/images/front page image.jpg");
+.content {
+  background-image: url("../images/BANNER\ IMAGE\ 1.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -23,73 +22,164 @@ header {
   flex-direction: column;
   align-items: center;
   justify-content: center;
- 
 }
 
-
-#heading{
-    padding: 15px;
-    color: rgb(245, 92, 92);
-    font-size: 40px;
-    font-family: "Kanit", sans-serif;
-    font-weight: 800;
-    font-style: italic;
-    border-style: solid;
-    border-width: 2px;
-    border-radius: 12px;
-    background-color: rgb(255, 255, 255, 0.7);
+.heading {
+  color: white;
+  font-size: 40px;
+  font-family: "Kanit", sans-serif;
+  font-weight: 800;
+  font-style: italic;
 }
 
-#sub-heading{
-    color: white;
-    font-size: 30px;
-    font-family: "League Spartan", sans-serif;
-    font-weight: 500;
-    font-style: normal;
+.sub-heading {
+  color: white;
+  font-size: 30px;
+  font-family: "League Spartan", sans-serif;
 
+  font-weight: 500;
+  font-style: normal;
 }
-#row{
+
+/* search button section */
+.search-buttons {
+  width: 100%;
+  height: 200px;
+  /* background-color: lightcyan; */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+}
+
+.current-location {
+  width: 40%;
+  border: 1px solid #ccc;
+  box-shadow: rgba(28, 28, 28, 0.08) 0px 2px 8px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.location-icon {
+  color: rgb(245, 92, 92);
+  margin-right: 8px;
+}
+
+.current {
+  color: #757575;
+  width: 100%;
+}
+
+.dropdown {
+  width: 34%;
+  padding: 10px;
+  border-right: 1px solid #ccc;
+}
+.dropdown button:focus {
+  outline: none;
+}
+
+.search-citybuttons {
+  width: 70%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 30px;
+}
+
+.city {
+  width: 100% !important;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.search-city {
+  padding: 10px;
+  width: 100%;
+  border: none;
+  background-color: transparent;
+}
+.search-city:focus {
+  outline: none;
+}
+.search-icon {
+  color: #757575;
+}
+
+.click-button {
+  margin-left: 20px;
+  width: 10%;
+}
+
+.search-btn {
+  width: 100%;
+  background-color: rgb(245, 92, 92);
+  border: none;
+}
+
+#restaurants {
     display: flex;
-    flex-wrap: flex;
-}
-
-aside {
-    flex: 70%;
-}
-
-#location-image {
-    border-radius: 30px;
-    max-height: 700px;
-    max-width: 500px;
-    padding: 80px 50px 00px 150px;
-}
-
-main {
-    display: flex;
-    flex-direction: column;
+    flex-direction: row;
     flex-wrap: wrap;
+    width: 98%;
     justify-content: center;
     align-items: center;
     margin: auto;
-    flex: 30%
+    margin-bottom: 5%;
 }
 
-.event-info {
+/* Card styling */
+.card {
+    margin: 20px;
     position: relative;
-    margin: 15px 120px 15px 0px;
-    width: 700px;
+    top: 0;
+    border: none;
+    width: 19rem;
+  }
+  
+  .card:hover {
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    /* transition: vertical 2s; */
+    /* transition: all 2s scale;
+    animation: scale 1.5s both; */
+    transition: top ease 0.5s;
+    top: -10px;
+  }
+  
+  /* Style for the card body */
+.card-body {
+    padding: 15px;
+}
+  /* card styling */
+.card-img-top {
+    width: 100%;
+    height: 200px;
+  }
+  
+  .card-title {
     display: flex;
-    justify-content: right;
-    flex-direction: column;
-}
+    flex-direction: row;
+    justify-content: space-between;
+  }
 
-.info-section {
-    padding: 5px 0px 5px 30px;
-}
+  .card.address {
+    color: #8d8d8d;
+    font-size: 14px;
+  }
 
-.rating {
+  .card-category {
+    font-size: 14px;
+  }
+  
+  .card-rating {
     width: 50px;
-    height: 30px;
+    height: 45px;
     font-size: 14px;
     padding: 0 4px;
     background-color: #0d5020;
@@ -101,44 +191,5 @@ main {
     align-items: center;
     justify-content: space-around;
   }
-
-#app-name{
-    padding: 10px
-}
-
-
-#event {
-    font-size: 30px;
-}
-
-#travel {
-    display: inline-block;
-}
-
-#rating-section{
-    margin-left: 27px;
-}
-
-footer {
-    display: flex;
-    justify-content: center;
-}
-.back-btn {
-   display: block;
-    border: none;
-    border-radius: 8px;
-    padding: 16px 32px;
-    text-align: center;
-    text-decoration: none;
-    margin: 30px 80px 60px 60px;
-    font-size: 16px;
-    transition-duration: 0.4s;
-    cursor: pointer;
-    background-color:  rgb(245, 92, 92);; 
-    color: rgb(255, 255, 255); 
-    border: none;
-}
-
-.back-btn:hover {
-    background-color: #0d6efd;
-}
+  
+  
