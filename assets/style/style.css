@@ -203,3 +203,34 @@
   align-items: center;
   justify-content: space-around;
 }
+
+
+.card-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.card.address {
+  color: #8d8d8d;
+  font-size: 14px;
+}
+
+.card-category {
+  font-size: 14px;
+}
+
+.card-rating {
+  width: 50px;
+  height: 45px;
+  font-size: 14px;
+  padding: 0 4px;
+  background-color: #0d5020;
+  text-align: center;
+  border-radius: 8px;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
